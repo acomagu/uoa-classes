@@ -1,0 +1,9 @@
+# Selection
+50000 : elapsed time is   9293.853 milliseconds.
+100000 : elapsed time is  37149.444 milliseconds.
+150000 : elapsed time is  83782.949 milliseconds.
+
+# Merge
+50000 : elapsed time is     19.781 milliseconds.
+100000 : elapsed time is     41.507 milliseconds.
+150000 : elapsed time is     61.817 milliseconds.
