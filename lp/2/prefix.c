@@ -170,6 +170,9 @@ expr_t parse(token_t tokens[]) {
   return expr(tokens, &i);
 }
 
+#ifdef DEBUG
+const char typenames[][10] = {"TERM", "NUMBER", "(", ")", "+", "-", "*", "/"};
+
 void p_expr(expr_t *, int);
 
 void p_indent(int n) {
@@ -183,7 +186,7 @@ void p_factor(factor_t *n, int nind) {
     return;
   }
   printf("factor{\n");
-  p_indent(nind + 1), printf("num: %d\n", n->num);
+  p_indent(nind + 1), printf("num: %s\n", typenames[n->num]);
   p_indent(nind + 1), printf("expr: "), p_expr(n->expr, nind + 1), printf("\n");
   p_indent(nind), printf("}");
 }
@@ -194,7 +197,7 @@ void p_term(term_t *n, int nind) {
     return;
   }
   printf("term{\n");
-  p_indent(nind + 1), printf("type: %d\n", n->type);
+  p_indent(nind + 1), printf("type: %s\n", typenames[n->type]);
   p_indent(nind + 1), printf("lhs: "), p_factor(&n->lhs, nind + 1),
       printf("\n");
   p_indent(nind + 1), printf("rhs: "), p_term(n->rhs, nind + 1), printf("\n");
@@ -207,11 +210,12 @@ void p_expr(expr_t *n, int nind) {
     return;
   }
   printf("expr{\n");
-  p_indent(nind + 1), printf("type: %d\n", n->type);
+  p_indent(nind + 1), printf("type: %s\n", typenames[n->type]);
   p_indent(nind + 1), printf("lhs: "), p_term(&n->lhs, nind + 1), printf("\n");
   p_indent(nind + 1), printf("rhs: "), p_expr(n->rhs, nind + 1), printf("\n");
   p_indent(nind), printf("}");
 }
+#endif
 
 void print_expr_as_prefix(expr_t);
 
@@ -260,6 +264,10 @@ int main() {
   token_t tokens[MAX_N_TOKEN + 1];
   lex(tokens);
   expr_t ast = parse(tokens);
+#ifdef DEBUG
+  p_expr(&ast, 0);
+  printf("\n");
+#endif
   print_as_prefix(ast);
   return 0;
 }
