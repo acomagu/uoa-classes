@@ -1,0 +1,31 @@
+P  {}
+
+H1  {}
+
+H2  {}
+
+H3  {}
+
+A  {
+	color : Green;
+	text-decoration : underline;
+}
+
+A:Visited  {
+	color : Green;
+	text-decoration : underline;
+}
+
+A:Active  {
+	color : Green;
+	text-decoration : underline;
+}
+
+A:Hover  {
+	color : Black;
+	text-decoration : none;
+	background : Green;
+}
+
+BODY  {}
+
